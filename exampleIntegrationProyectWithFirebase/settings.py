@@ -127,3 +127,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 cred = credentials.Certificate(
     os.environ.get("GOOGLE_APPLICATION_CREDENTIALS2"))
 firebase_admin.initialize_app(cred)
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
+}

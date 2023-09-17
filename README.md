@@ -31,6 +31,35 @@ python manage.py runserver
 ```
 
 ####  FOR LISTING ALL THE ENDPOINTS FOLLOW THIS GUIDE:
+
 ```bash
 https://github.com/axnsan12/drf-yasg
 ```
+
+#  FOR COVERING THE TESTS RUN THE FOLLOWING COMMAND
+
+```bash
+coverage run manage.py test
+```
+
+###  FOR SEEING THE COVERAGE REPORT RUN THE FOLLOWING COMMAND
+
+```bash
+coverage report -m
+```
+
+###  FOR SEEING THE COVERAGE REPORT IN HTML FORMAT RUN THE FOLLOWING COMMAND
+
+```bash
+coverage html
+```
+
+After running the above command you will see a folder named htmlcov in the root directory of the project. Open the index.html file in the browser to see the coverage report in a more readable format.
+
+###  FOR SEEING WHAT LINES ARE NOT COVERED INSTALL THE "COVERAGE GUTTER" EXTENSION IN VS CODE AND RUN THE FOLLOWING COMMAND
+
+```bash
+coverage xml
+```
+
+Then click on "Watch" to see the results in the editor.
