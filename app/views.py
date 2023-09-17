@@ -45,3 +45,32 @@ class RegisterView(CsrfExemptMixin, views.APIView):
             return Response({"token": auth.create_custom_token(user.uid)}, status=201)
         except Exception as e:
             return Response({"error": str(e)}, status=400)
+
+
+class LoginView(CsrfExemptMixin, views.APIView):
+    def post(self, request):
+        authorization_header = request.headers.get('Bearer')
+        email = request.data.get('email')
+        if not authorization_header:
+            return Response({"error": "Token login is missing"}, status=400)
+        try:
+            user = auth.get_user_by_email(email)
+            response = Response({
+                "login": "success",
+                "user": {
+                    'uid': user.uid,
+                    'email': user.email,
+                    'display_name': user.display_name
+                }
+            }, status=200)
+            response.set_cookie('token', authorization_header, secure=True)
+            return response
+        except Exception as e:
+            return Response({"error": str(e)}, status=400)
+
+
+class LogoutView(CsrfExemptMixin, views.APIView):
+    def post(self, request):
+        response = Response({"logout": "success"}, status=200)
+        response.delete_cookie('token')
+        return response

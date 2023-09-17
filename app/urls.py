@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from .views import RegisterView
+from .views import RegisterView, LoginView, LogoutView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -18,6 +18,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name="this is the API documentation"),
+    path('swagger', schema_view.with_ui('swagger', cache_timeout=0),
+         name="this is the API documentation"),
     path("register", RegisterView.as_view()),
+    path("login", LoginView.as_view()),
+    path("logout", LogoutView.as_view()),
 ]
