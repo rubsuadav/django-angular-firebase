@@ -34,9 +34,7 @@ class RegisterView(CsrfExemptMixin, views.APIView):
                 password=password,
                 display_name=name + last_name)
 
-            db = firestore.client()
-
-            db.collection(u'users').document(user.uid).set({
+            firestore.client().collection(u'users').document(user.uid).set({
                 u'name': name,
                 u'last_name': last_name,
                 u'email': email,
