@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from firebase_admin import auth
+from firebase_admin import firestore
 from .validators import validate_data
-from google.cloud.firestore_v1 import Client
 
 
 class CsrfExemptMixin:
@@ -34,7 +34,7 @@ class RegisterView(CsrfExemptMixin, views.APIView):
                 password=password,
                 display_name=name + last_name)
 
-            Client().collection(u'users').document(user.uid).set({
+            firestore.client().collection(u'users').document(user.uid).set({
                 u'name': name,
                 u'last_name': last_name,
                 u'email': email,
