@@ -80,6 +80,11 @@ class RegisterViewTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
 
+    @classmethod
+    def tearDownClass(cls):
+        delete_users_collection()
+        delete_auth_users()
+
     def test_register_success(self):
         fetch = requests.get('https://randomuser.me/api/')
         mail = fetch.json()['results'][0]['email'].replace('example', 'gmail')
@@ -176,6 +181,11 @@ class RegisterViewTestCase(TestCase):
 class LogoutViewTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
+
+    @classmethod
+    def tearDownClass(cls):
+        delete_users_collection()
+        delete_auth_users()
 
     def test_logout_success(self):
         fetch = requests.get('https://randomuser.me/api/')
