@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-rkix11^npb9q#m7ok+gc2nibd&fm@n(*e63%5c$usko#y+eq^a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     "authentication",
+    "corsheaders",
     "CRUD_API"
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +57,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1',
+    'http://127.0.0.1:4200',
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:4200', 'http://127.0.0.1:4200']
+
+CORS_ALLOW_HEADERS = ['Content-Type', 'Bearer']
 
 ROOT_URLCONF = 'exampleIntegrationProyectWithFirebase.urls'
 
