@@ -2,23 +2,18 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 import requests
-import random
 import json
-
-
-def generate_phone_number():
-    phone_number = ''
-    for i in range(9):
-        if i == 0:
-            phone_number += str(random.randint(6, 7))
-        else:
-            phone_number += str(random.randint(0, 9))
-    return phone_number
+from exampleIntegrationProyectWithFirebase.utils import generate_phone_number, delete_users_collection, delete_auth_users
 
 
 class LoginViewTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
+
+    @classmethod
+    def tearDownClass(cls):
+        delete_users_collection()
+        delete_auth_users()
 
     def test_login_success(self):
         fetch = requests.get('https://randomuser.me/api/')

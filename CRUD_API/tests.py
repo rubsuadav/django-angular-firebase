@@ -2,7 +2,7 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
 import requests
-from authentication.tests import generate_phone_number
+from exampleIntegrationProyectWithFirebase.utils import generate_phone_number, delete_posts_collection, delete_auth_users
 import json
 from firebase_admin import firestore
 
@@ -29,6 +29,11 @@ class PostListViewTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
 
+    @classmethod
+    def tearDownClass(cls):
+        delete_posts_collection()
+        delete_auth_users()
+
     ######################################################## GETS #######################################################
 
     def test_get_all_posts(self):
@@ -37,10 +42,16 @@ class PostListViewTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_single_post(self):
-        response = self.client.get('/api/post/p6pCJAOItxbOJT9gMl6V')
+        firestore.client().collection(u'posts').document().create({
+            u'title': 'Test first Post',
+            u'content': 'This is the first post.'
+        })
+        uid = firestore.client().collection(u'posts')._query().where(
+            u'title', u'==', u'Test first Post').get()[0].id
+        response = self.client.get(f'/api/post/{uid}')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['title'], 'titulo 1')
+        self.assertEqual(response.data['title'], 'Test first Post')
 
     def test_get_nonexistent_post(self):
         response = self.client.get('/api/post/999')
@@ -58,6 +69,7 @@ class PostListViewTestCase(TestCase):
             '/api/post', data=json.dumps(data), content_type='application/json', headers=headers)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['message'], 'Post created')
 
     def test_create_post_missing_token(self):
         data = {'title': 'Test Post', 'content': 'This is a test post.'}
