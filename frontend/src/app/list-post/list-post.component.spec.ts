@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListPostComponent as list } from "./list-post.component";
+import { ListPostComponent as list } from './list-post.component';
 
 describe('ListPostComponent', () => {
   let component: list;

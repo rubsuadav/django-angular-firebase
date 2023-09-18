@@ -1,7 +1,7 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { ListPostComponent as list } from "./list-post/list-post.component";
-import { CreatePostComponent as create } from "./create-post/create-post.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ListPostComponent as list } from './list-post/list-post.component';
+import { CreatePostComponent as create } from './create-post/create-post.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: "posts/create",
+    path: 'posts/create',
     component: create,
   },
 ];

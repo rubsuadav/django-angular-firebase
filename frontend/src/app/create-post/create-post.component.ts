@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { Post } from "../post";
-import { PostService as service } from "../post.service";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Post } from '../post';
+import { PostService as service } from '../post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post',
