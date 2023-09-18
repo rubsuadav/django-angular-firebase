@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ListPostComponent } from './list-post.component';
+import { ListPostComponent as list } from "./list-post.component";
 
 describe('ListPostComponent', () => {
-  let component: ListPostComponent;
-  let fixture: ComponentFixture<ListPostComponent>;
+  let component: list;
+  let fixture: ComponentFixture<list>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListPostComponent]
+      declarations: [list],
     });
-    fixture = TestBed.createComponent(ListPostComponent);
+    fixture = TestBed.createComponent(list);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Post } from './post';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Post } from "./post";
 import { Observable, map, switchMap } from 'rxjs';
 
 @Injectable({
@@ -40,7 +40,7 @@ export class PostService {
           phone_number: telefono,
         };
         return generatedData;
-      })
+      }),
     );
   }
 

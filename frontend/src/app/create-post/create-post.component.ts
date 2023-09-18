@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Post } from '../post';
-import { PostService } from '../post.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Post } from "../post";
+import { PostService as service } from "../post.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-create-post',
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class CreatePostComponent implements OnInit {
   post: Post = new Post();
 
-  constructor(private postService: PostService, private roter: Router) {}
+  constructor(private postService: service, private roter: Router,) {}
 
   ngOnInit(): void {}
 
@@ -18,7 +18,7 @@ export class CreatePostComponent implements OnInit {
     this.postService.getToken().subscribe((token: any) => {
       localStorage.setItem('token', token['token']);
       token = localStorage.getItem('token');
-      this.postService.create(this.post, token).subscribe((data) => {
+      this.postService.create(this.post, token).subscribe(() => {
         this.goToPostList();
       });
     });

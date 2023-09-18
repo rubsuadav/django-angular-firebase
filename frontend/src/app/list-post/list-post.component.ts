@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Post } from '../post';
-import { PostService } from '../post.service';
+import { Component, OnInit } from "@angular/core";
+import { Post } from "../post";
+import { PostService as service } from "../post.service";
 
 @Component({
   selector: 'app-list-post',
@@ -8,7 +8,7 @@ import { PostService } from '../post.service';
 })
 export class ListPostComponent implements OnInit {
   posts: Post[];
-  constructor(private postServicio: PostService) {}
+  constructor(private postServicio: service) {}
 
   ngOnInit(): void {
     this.getPosts();
