@@ -1,0 +1,23 @@
+<h2>Posts</h2>
+<table class="border-separate border border-slate-400 mx-auto w-11/12">
+  <thead class="bg-orange-200">
+    <tr>
+      <th
+        class="border border-slate-300 text-cyan-700 font-extrabold text-center"
+      >
+        Titulo
+      </th>
+      <th
+        class="border border-slate-300 text-pink-800 font-extrabold text-center"
+      >
+        Contenido
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts" class="text-center">
+      <td class="border border-slate-300">{{ post.title }}</td>
+      <td class="border border-slate-300">{{ post.content }}</td>
+    </tr>
+  </tbody>
+</table>
