@@ -48,7 +48,7 @@ export class PostService {
     return this.generateData().pipe(
       switchMap((data: any) => {
         return this.httpClient.post(this.authUrl, data);
-      })
+      }),
     );
   }
   getAll(): Observable<Post[]> {

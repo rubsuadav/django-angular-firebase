@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class CreatePostComponent implements OnInit {
   post: Post = new Post();
 
-  constructor(private postService: service, private roter: Router,) {}
+  constructor(private postService: service, private roter: Router) {}
 
   ngOnInit(): void {}
 
