@@ -19,7 +19,9 @@ class PostListView(CsrfExemptMixin, views.APIView):
             posts = firestore.client().collection(u'posts').stream()
             posts_list = []
             for post in posts:
-                posts_list.append(post.to_dict())
+                post_dict = post.to_dict()
+                post_dict['uid'] = post.id
+                posts_list.append(post_dict)
             return Response(posts_list, status=200)
         else:
             post = firestore.client().collection(u'posts').document(str(post_id)).get()

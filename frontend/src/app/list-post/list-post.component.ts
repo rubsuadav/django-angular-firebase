@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../post';
 import { PostService as service } from '../post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-post',
@@ -8,10 +9,29 @@ import { PostService as service } from '../post.service';
 })
 export class ListPostComponent implements OnInit {
   posts: Post[];
-  constructor(private postServicio: service) {}
+
+  constructor(private router: Router, private postServicio: service) {}
 
   ngOnInit(): void {
     this.getPosts();
+  }
+
+  showPost(uid: string): void {
+    this.router.navigate(['posts/', uid]);
+  }
+
+  editPost(uid: string): void {
+    this.router.navigate(['posts/update', uid]);
+  }
+
+  deletePost(uid: string): void {
+    this.postServicio.getToken().subscribe((token: any) => {
+      localStorage.setItem('token', token['token']);
+      token = localStorage.getItem('token');
+      this.postServicio.delete(uid, token).subscribe(() => {
+        this.getPosts();
+      });
+    });
   }
 
   private getPosts() {

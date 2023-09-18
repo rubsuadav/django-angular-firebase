@@ -12,12 +12,37 @@
       >
         Contenido
       </th>
+      <th
+        class="border border-slate-300 text-green-800 font-extrabold text-center"
+      >
+        Acciones
+      </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let post of posts" class="text-center">
       <td class="border border-slate-300">{{ post.title }}</td>
       <td class="border border-slate-300">{{ post.content }}</td>
+      <td>
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2"
+          (click)="editPost(post.uid)"
+        >
+          Editar
+        </button>
+        <button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-3"
+          (click)="deletePost(post.uid)"
+        >
+          Eliminar
+        </button>
+        <button
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          (click)="showPost(post.uid)"
+        >
+          Ver detalle
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
