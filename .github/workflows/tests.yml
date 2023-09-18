@@ -20,6 +20,10 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install codacy-coverage
+      - name: Set up Firebase Admin SDK
+        run: |
+          echo "$GOOGLE_APPLICATION_CREDENTIALS2" > firebase-credentials.json
+          export GOOGLE_APPLICATION_CREDENTIALS2=/github/workspace/firebase-credentials.json
       - name: Run tests
         run: |
           coverage run --branch --source=. ./manage.py test  --keepdb 
