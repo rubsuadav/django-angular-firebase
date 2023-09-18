@@ -23,7 +23,7 @@ jobs:
       - name: Run tests
         run: |
           echo "$GOOGLE_APPLICATION_CREDENTIALS2" > firebase-credentials.json
-          export GOOGLE_APPLICATION_CREDENTIALS2=/github/workspace/firebase-credentials.json
+          export GOOGLE_APPLICATION_CREDENTIALS2=firebase-credentials.json
           coverage run --branch --source=. ./manage.py test  --keepdb 
           coverage xml
       - name: Codacy Coverage Reporter
