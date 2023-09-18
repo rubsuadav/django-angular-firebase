@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -23,4 +23,5 @@ urlpatterns = [
     path("register", RegisterView.as_view()),
     path("login", LoginView.as_view()),
     path("logout", LogoutView.as_view()),
+    path("", include("CRUD_API.urls"))
 ]
