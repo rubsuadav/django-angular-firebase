@@ -13,7 +13,7 @@ export class UpdatePostComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: service,
-    private router: Router
+    private router: Router,
   ) {}
   ngOnInit(): void {
     this.getPost();
