@@ -2,7 +2,7 @@
   <h3 class="text-center">Creción de posts</h3>
   <br />
   <br />
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" #postForm="ngForm">
     <div class="mb-4">
       <label class="block text-gray-700 font-bold mb-2">Titulo</label>
       <input
@@ -11,7 +11,26 @@
         placeholder="Titulo"
         name="title"
         [(ngModel)]="post.title"
+        required
+        minlength="3"
+        maxlength="40"
+        #title="ngModel"
+        id="title"
       />
+      <br />
+      <br />
+      <div
+        class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+        *ngIf="title.invalid && (title.dirty || title.touched)"
+      >
+        <div *ngIf="title?.errors?.['required']">El titulo es requerido</div>
+        <div *ngIf="title?.errors?.['minlength']">
+          El titulo debe de tener mas de 3 caracteres
+        </div>
+        <div *ngIf="title?.errors?.['maxlength']">
+          El titulo debe de tener menos de 40 caracteres
+        </div>
+      </div>
     </div>
     <div class="mb-4">
       <label class="block text-gray-700 font-bold mb-2">Contenido</label>
@@ -21,12 +40,34 @@
         placeholder="Contenido"
         name="content"
         [(ngModel)]="post.content"
+        required
+        minlength="3"
+        maxlength="100"
+        #content="ngModel"
+        id="content"
       />
+      <br />
+      <br />
+      <div
+        class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+        *ngIf="content.invalid && (content.dirty || content.touched)"
+      >
+        <div *ngIf="content?.errors?.['required']">
+          El contenido es requerido
+        </div>
+        <div *ngIf="content?.errors?.['minlength']">
+          El contenido debe de tener mas de 3 caracteres
+        </div>
+        <div *ngIf="content?.errors?.['maxlength']">
+          El contenido debe de tener menos de 100 caracteres
+        </div>
+      </div>
     </div>
 
     <button
       type="submit"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      [disabled]="!postForm.valid"
     >
       Crear
     </button>
