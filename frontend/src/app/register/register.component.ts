@@ -10,13 +10,16 @@ import { User } from '../user';
 export class RegisterComponent implements OnInit {
   user: User = new User();
 
-  constructor(private roter: Router, private authService: auth) {}
+  constructor(
+    private router: Router, 
+    private authService: auth
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.authService.register(this.user).subscribe((data: any) => {
-      this.roter.navigate(['/posts']);
+    this.authService.register(this.user).subscribe(() => {
+      this.router.navigate(['/posts']);
     });
   }
 }
