@@ -1,6 +1,6 @@
 ![Analysis Badge](https://github.com/rubsuadav/django-react-firebase/actions/workflows/analysis.yml/badge.svg)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8ec3c836bcb2461fb31f169283e8fd66)](https://app.codacy.com/gh/rubsuadav/django-react-firebase/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8ec3c836bcb2461fb31f169283e8fd66)](https://app.codacy.com/gh/rubsuadav/django-angular-firebase/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/8ec3c836bcb2461fb31f169283e8fd66)](https://app.codacy.com/gh/rubsuadav/django-react-firebase/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
