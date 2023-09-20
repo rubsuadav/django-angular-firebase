@@ -77,7 +77,6 @@
         required
         #email="ngModel"
         id="email"
-        email
         pattern="^\w+([.-]?\w+)*@(gmail|hotmail|outlook)\.com$"
       />
       <br />
@@ -87,7 +86,6 @@
         *ngIf="email.invalid && (email.dirty || email.touched)"
       >
         <div *ngIf="email?.errors?.['required']">El email es requerido</div>
-        <div *ngIf="email?.errors?.['email']">El email es invalido</div>
         <div *ngIf="email?.errors?.['pattern']">
           El email debe de ser de gmail, hotmail o outlook
         </div>
@@ -155,9 +153,22 @@
     <button
       type="submit"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      [disabled]="!postForm.valid"
     >
       Registrarse
     </button>
+    <br />
+    <br />
+    <div
+      *ngIf="error"
+      class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+    >
+      {{ error }}
+    </div>
+    <div
+      *ngIf="formSubmitted && postForm.invalid"
+      class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+    >
+      Debes rellenar todos los campos
+    </div>
   </form>
 </div>

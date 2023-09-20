@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, switchMap, catchError, throwError } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
@@ -52,6 +52,10 @@ export class AuthService {
   }
 
   register(user: User): Observable<any> {
-    return this.httpClient.post<User>(this.registerUrl, user);
+    return this.httpClient.post<User>(this.registerUrl, user).pipe(
+      catchError((error) => {
+        return throwError(() => error.error);
+      })
+    );
   }
 }

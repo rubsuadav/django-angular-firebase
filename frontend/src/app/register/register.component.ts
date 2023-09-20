@@ -9,17 +9,31 @@ import { User } from '../user';
 })
 export class RegisterComponent implements OnInit {
   user: User = new User();
+  error: string = '';
+  formSubmitted: boolean = false;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authService: auth,
   ) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.authService.register(this.user).subscribe(() => {
-      this.router.navigate(['/posts']);
+    this.formSubmitted = true;
+    this.authService.register(this.user).subscribe({
+      next: (token: any) => {
+        localStorage.setItem('token', token['token']);
+        this.router.navigate(['/posts']).then(() => {
+          window.location.reload();
+        });
+      },
+      error: (error) => {
+        this.error = error.error;
+        if (error.error === 'expected string or bytes-like object') {
+          this.error = '';
+        }
+      },
     });
   }
 }
