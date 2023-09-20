@@ -4,6 +4,7 @@ import { ListPostComponent as list } from './list-post/list-post.component';
 import { CreatePostComponent as create } from './create-post/create-post.component';
 import { UpdatePostComponent as update } from './update-post/update-post.component';
 import { PostDetailsComponent as details } from './post-details/post-details.component';
+import { RegisterComponent as register } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
     path: 'posts/:uid',
     component: details,
     pathMatch: 'full',
+  },
+  {
+    path: 'register',
+    component: register,
   },
 ];
 

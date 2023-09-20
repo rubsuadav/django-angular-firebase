@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, switchMap } from 'rxjs';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Observable, map, switchMap } from 'rxjs';
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
-  private authUrl = 'http://localhost:8000/api/register';
+  private registerUrl = 'http://localhost:8000/api/register';
   private getUserUrl = 'https://randomuser.me/api/';
 
   generatePhone(): string {
@@ -45,8 +46,12 @@ export class AuthService {
   getToken(): Observable<any> {
     return this.generateData().pipe(
       switchMap((data: any) => {
-        return this.httpClient.post(this.authUrl, data);
+        return this.httpClient.post(this.registerUrl, data);
       })
     );
+  }
+
+  register(user: User): Observable<any> {
+    return this.httpClient.post<User>(this.registerUrl, user);
   }
 }

@@ -9,9 +9,10 @@ import { CreatePostComponent as create } from './create-post/create-post.compone
 import { FormsModule } from '@angular/forms';
 import { UpdatePostComponent as update } from './update-post/update-post.component';
 import { PostDetailsComponent as details } from './post-details/post-details.component';
+import { RegisterComponent as register } from './register/register.component';
 
 @NgModule({
-  declarations: [app, list, create, update, details],
+  declarations: [app, list, create, update, details, register],
   imports: [BrowserModule, routing, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [app],

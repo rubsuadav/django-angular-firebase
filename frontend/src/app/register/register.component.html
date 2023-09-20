@@ -1,0 +1,163 @@
+<br />
+<div class="container">
+  <h3 class="text-center">Formulario de registro</h3>
+  <br />
+  <br />
+  <form (ngSubmit)="onSubmit()" #postForm="ngForm">
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2"></label>
+      <input
+        type="text"
+        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Nombre"
+        name="name"
+        [(ngModel)]="user.name"
+        required
+        minlength="3"
+        maxlength="40"
+        #name="ngModel"
+        id="name"
+      />
+      <br />
+      <br />
+      <div
+        class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+      >
+        <div *ngIf="name?.errors?.['required']">El nombre es requerido</div>
+        <div *ngIf="name?.errors?.['minlength']">
+          El nombre debe de tener mas de 3 caracteres
+        </div>
+        <div *ngIf="name?.errors?.['maxlength']">
+          El nombre debe de tener menos de 40 caracteres
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2"></label>
+      <input
+        type="text"
+        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Apellido"
+        name="last_name"
+        [(ngModel)]="user.last_name"
+        required
+        minlength="3"
+        maxlength="40"
+        #lastName="ngModel"
+        id="last_name"
+      />
+      <br />
+      <br />
+      <div
+        class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+        *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+      >
+        <div *ngIf="lastName?.errors?.['required']">
+          El apellido es requerido
+        </div>
+        <div *ngIf="lastName?.errors?.['minlength']">
+          El apellido debe de tener mas de 3 caracteres
+        </div>
+        <div *ngIf="lastName?.errors?.['maxlength']">
+          El apellido debe de tener menos de 40 caracteres
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2"></label>
+      <input
+        type="email"
+        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Correo electronico"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        #email="ngModel"
+        id="email"
+        email
+        pattern="^\w+([.-]?\w+)*@(gmail|hotmail|outlook)\.com$"
+      />
+      <br />
+      <br />
+      <div
+        class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+      >
+        <div *ngIf="email?.errors?.['required']">El email es requerido</div>
+        <div *ngIf="email?.errors?.['email']">El email es invalido</div>
+        <div *ngIf="email?.errors?.['pattern']">
+          El email debe de ser de gmail, hotmail o outlook
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2"></label>
+      <input
+        type="password"
+        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Contraseña"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+        minlength="6"
+        maxlength="40"
+        #password="ngModel"
+        id="password"
+      />
+      <br />
+      <br />
+      <div
+        class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+      >
+        <div *ngIf="password?.errors?.['required']">
+          La contraseña es requerido
+        </div>
+        <div *ngIf="password?.errors?.['minlength']">
+          La contraseña debe de tener mas de 6 caracteres
+        </div>
+        <div *ngIf="password?.errors?.['maxlength']">
+          La contraseña debe de tener menos de 40 caracteres
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2"></label>
+      <input
+        type="tel"
+        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Telefono"
+        name="phone_number"
+        [(ngModel)]="user.phone_number"
+        required
+        #phone="ngModel"
+        id="phone"
+        pattern="^(\\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$"
+      />
+      <br />
+      <br />
+      <div
+        class="text-red-500 text-base bg-red-100 rounded py-4 mx-auto w-80"
+        *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+      >
+        <div *ngIf="phone?.errors?.['required']">El telefono es requerido</div>
+        <div *ngIf="phone?.errors?.['pattern']">
+          El telefono debe de ser de España y no debe de contener letras
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      [disabled]="!postForm.valid"
+    >
+      Registrarse
+    </button>
+  </form>
+</div>

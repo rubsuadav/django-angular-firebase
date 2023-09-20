@@ -1,13 +1,18 @@
+<br />
 <nav
   class="flex flex-wrap items-center text-base container mx-auto p-5 flex-col md:flex-row bg-black text-white w-full"
 >
-  <a class="mr-5" routerLink="posts" routerLinkActive="active">Posts</a>
-  <a class="mr-5" routerLink="posts/create" routerLinkActive="active"
-    >Crear post</a
-  >
+  <div class="mr-auto">
+    <a class="mr-10" routerLink="posts" routerLinkActive="active">Posts</a>
+    <a routerLink="posts/create" routerLinkActive="active">Crear post</a>
+  </div>
+  <div class="ml-auto">
+    <a class="ml-12" routerLink="register" routerLinkActive="active"
+      >Register</a
+    >
+  </div>
 </nav>
 
-<h1 class="text-3xl font-bold underline text-center">{{ title }}</h1>
 <div class="text-center">
   <router-outlet></router-outlet>
 </div>
