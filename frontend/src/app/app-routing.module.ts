@@ -21,13 +21,13 @@ const routes: Routes = [
   {
     path: 'posts/create',
     component: create,
-    canActivate:[authGuardGuard]
+    canActivate: [authGuardGuard],
   },
   {
     path: 'posts/update/:uid',
     component: update,
     pathMatch: 'full',
-    canActivate:[authGuardGuard]
+    canActivate: [authGuardGuard],
   },
   {
     path: 'posts/:uid',
