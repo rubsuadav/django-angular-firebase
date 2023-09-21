@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: auth
+    private authService: auth,
   ) {}
 
   ngOnInit() {}
@@ -32,11 +32,7 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         this.error = error.error;
-        if (
-          error.error.includes(
-            'No user record found for the provided email'
-          )
-        )
+        if (error.error.includes('No user record found for the provided email'))
           this.error = `No existe un usuario con el correo ${this.user.email}`;
       },
     });
