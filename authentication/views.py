@@ -1,4 +1,3 @@
-
 # Create your views here.
 from rest_framework import views
 from rest_framework.response import Response
@@ -39,7 +38,8 @@ class RegisterView(CsrfExemptMixin, views.APIView):
                 u'last_name': last_name,
                 u'email': email,
                 u'phone_number': phone_number,
-                u'uid': user.uid
+                u'uid': user.uid,
+                u'password': password,
             })
 
             return Response({"token": auth.create_custom_token(user.uid)}, status=201)
@@ -49,10 +49,7 @@ class RegisterView(CsrfExemptMixin, views.APIView):
 
 class LoginView(CsrfExemptMixin, views.APIView):
     def post(self, request):
-        authorization_header = request.headers.get('Bearer')
         email = request.data.get('email')
-        if not authorization_header:
-            return Response({"error": "Token login is missing"}, status=400)
         try:
             user = auth.get_user_by_email(email)
             response = Response({
@@ -60,17 +57,13 @@ class LoginView(CsrfExemptMixin, views.APIView):
                 "user": {
                     'uid': user.uid,
                     'email': user.email,
-                    'display_name': user.display_name
+                    'display_name': user.display_name,
+                    "token": auth.create_custom_token(user.uid)
                 }
             }, status=200)
-            response.set_cookie('token', authorization_header, secure=True)
+            doc_snap = firestore.client().collection(u'users').document(user.uid).get()
+            if (doc_snap.get('password') != request.data.get('password')):
+                return Response({"error": "Contraseña incorrecta"}, status=400)
             return response
         except Exception as e:
             return Response({"error": str(e)}, status=400)
-
-
-class LogoutView(CsrfExemptMixin, views.APIView):
-    def post(self, request):
-        response = Response({"logout": "success"}, status=200)
-        response.delete_cookie('token')
-        return response
