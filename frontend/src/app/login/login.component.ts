@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     if (postForm.invalid) return;
     this.authService.login(this.user).subscribe({
       next: (token: any) => {
-        localStorage.setItem('token', token['token']);
+        localStorage.setItem('token', token['user']['token']);
         this.router.navigate(['/posts']).then(() => {
           window.location.reload();
         });
