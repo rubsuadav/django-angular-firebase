@@ -4,11 +4,27 @@
 >
   <div class="mr-auto">
     <a class="mr-10" routerLink="posts" routerLinkActive="active">Posts</a>
-    <a routerLink="posts/create" routerLinkActive="active">Crear post</a>
+    <a
+      routerLink="posts/create"
+      routerLinkActive="active"
+      *ngIf="showCreatePostButton"
+      >Crear post</a
+    >
   </div>
   <div class="ml-auto">
-    <a class="ml-12" routerLink="register" routerLinkActive="active"
-      >Register</a
+    <a
+      class="ml-12"
+      routerLink="register"
+      routerLinkActive="active"
+      *ngIf="showRegisterButton"
+      >Registrarse</a
+    >
+    <a
+      class="ml-12"
+      routerLink="login"
+      routerLinkActive="active"
+      *ngIf="showLoginButton"
+      >Login</a
     >
   </div>
 </nav>
