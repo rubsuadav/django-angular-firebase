@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../post';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService as service } from '../post.service';
-import { AuthService as auth } from '../auth.service';
 
 @Component({
   selector: 'app-update-post',
@@ -11,10 +10,10 @@ import { AuthService as auth } from '../auth.service';
 export class UpdatePostComponent implements OnInit {
   uid: string;
   post: Post = new Post();
+
   constructor(
     private route: ActivatedRoute,
     private postService: service,
-    private authService: auth,
     private router: Router,
   ) {}
   ngOnInit(): void {
@@ -33,13 +32,13 @@ export class UpdatePostComponent implements OnInit {
     this.router.navigate(['/posts']);
   }
 
-  onSubmit() {
-    this.authService.getToken().subscribe((token: any) => {
-      localStorage.setItem('token', token['token']);
-      token = localStorage.getItem('token');
-      this.postService.update(this.uid, this.post, token).subscribe(() => {
-        this.goBack();
-      });
+  private updatePost() {
+    this.postService.update(this.uid, this.post).subscribe(() => {
+      this.goBack();
     });
+  }
+
+  onSubmit(): void {
+    this.updatePost();
   }
 }

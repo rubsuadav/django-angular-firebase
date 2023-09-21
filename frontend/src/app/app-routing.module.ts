@@ -6,6 +6,7 @@ import { UpdatePostComponent as update } from './update-post/update-post.compone
 import { PostDetailsComponent as details } from './post-details/post-details.component';
 import { RegisterComponent as register } from './register/register.component';
 import { LoginComponent as login } from './login/login.component';
+import { authGuardGuard } from './auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -20,11 +21,13 @@ const routes: Routes = [
   {
     path: 'posts/create',
     component: create,
+    canActivate:[authGuardGuard]
   },
   {
     path: 'posts/update/:uid',
     component: update,
     pathMatch: 'full',
+    canActivate:[authGuardGuard]
   },
   {
     path: 'posts/:uid',

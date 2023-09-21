@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, switchMap, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
@@ -11,46 +11,6 @@ export class AuthService {
 
   private registerUrl = 'http://localhost:8000/api/register';
   private loginUrl = 'http://localhost:8000/api/login';
-  private getUserUrl = 'https://randomuser.me/api/';
-
-  generatePhone(): string {
-    let phoneNumber = '';
-    for (let i = 0; i < 9; i++) {
-      if (i === 0) {
-        phoneNumber += String(Math.floor(Math.random() * 2) + 6);
-      } else {
-        phoneNumber += String(Math.floor(Math.random() * 10));
-      }
-    }
-    return phoneNumber;
-  }
-
-  generateData(): Observable<any> {
-    return this.httpClient.get(this.getUserUrl).pipe(
-      map((data: any) => {
-        const nombre = data['results'][0]['name']['first'];
-        const apellido = data['results'][0]['name']['last'];
-        const correo = data['results'][0]['email'].replace('example', 'gmail');
-        const telefono = this.generatePhone();
-        const generatedData = {
-          name: nombre,
-          last_name: apellido,
-          email: correo,
-          password: 'admin2',
-          phone_number: telefono,
-        };
-        return generatedData;
-      })
-    );
-  }
-
-  getToken(): Observable<any> {
-    return this.generateData().pipe(
-      switchMap((data: any) => {
-        return this.httpClient.post(this.registerUrl, data);
-      })
-    );
-  }
 
   register(user: User): Observable<any> {
     return this.httpClient.post<User>(this.registerUrl, user).pipe(

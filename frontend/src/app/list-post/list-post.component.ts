@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../post';
 import { PostService as service } from '../post.service';
 import { Router } from '@angular/router';
-import { AuthService as auth } from '../auth.service';
 
 @Component({
   selector: 'app-list-post',
@@ -14,7 +13,6 @@ export class ListPostComponent implements OnInit {
   constructor(
     private router: Router,
     private postServicio: service,
-    private authService: auth,
   ) {}
 
   ngOnInit(): void {
@@ -30,12 +28,8 @@ export class ListPostComponent implements OnInit {
   }
 
   deletePost(uid: string): void {
-    this.authService.getToken().subscribe((token: any) => {
-      localStorage.setItem('token', token['token']);
-      token = localStorage.getItem('token');
-      this.postServicio.delete(uid, token).subscribe(() => {
-        this.getPosts();
-      });
+    this.postServicio.delete(uid).subscribe(() => {
+      this.getPosts();
     });
   }
 
