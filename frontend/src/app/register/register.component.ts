@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService as auth } from '../auth.service';
 import { User } from '../user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -19,8 +20,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
+  onSubmit(postForm: NgForm): void {
     this.formSubmitted = true;
+    if (postForm.invalid) return;
     this.authService.register(this.user).subscribe({
       next: (token: any) => {
         localStorage.setItem('token', token['token']);
@@ -30,8 +32,19 @@ export class RegisterComponent implements OnInit {
       },
       error: (error) => {
         this.error = error.error;
-        if (error.error === 'expected string or bytes-like object') {
-          this.error = '';
+        if (
+          error.error ===
+          'The user with the provided email already exists (EMAIL_EXISTS).'
+        ) {
+          this.error = 'El usuario con el correo proporcionado ya existe.';
+          this.formSubmitted = true;
+        } else if (
+          error.error ===
+          'The user with the provided phone number already exists (PHONE_NUMBER_EXISTS).'
+        ) {
+          this.error =
+            'El usuario con el número de teléfono proporcionado ya existe.';
+          this.formSubmitted = true;
         }
       },
     });
